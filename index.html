@@ -4,55 +4,1061 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Contents · A Theory of Integration</title>
+
 <link rel="stylesheet" href="https://propropro25.github.io/book/shared.css">
+
 <style>
-.toc-page{max-width:1160px;margin:auto;padding:70px 28px 120px}.toc-page h1{font-family:Georgia,serif;font-size:clamp(52px,8vw,100px);font-weight:400;line-height:.95;margin:12px 0 22px}.toc-intro{max-width:650px;font:22px/1.5 Georgia,serif;color:#3e4344;margin:0 0 65px}.toc-part{border-top:1px solid var(--line);margin-top:18px}.toc-part>summary{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:30px 0;cursor:pointer;list-style:none}.toc-part>summary::-webkit-details-marker{display:none}.toc-part-title{font:32px/1.1 Georgia,serif}.toc-part-mark,.toc-chapter-mark,.toc-group-mark{width:30px;height:30px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:#68757a;flex:none}.toc-part[open]>summary .toc-part-mark,.toc-chapter[open]>summary .toc-chapter-mark,.toc-group[open]>summary .toc-group-mark{transform:rotate(45deg);background:var(--ocean);color:var(--white)}.toc-chapters{padding-bottom:20px}.toc-chapter{border-top:1px solid var(--line);padding-left:18px}.toc-chapter>summary{display:grid;grid-template-columns:45px 1fr 30px;gap:18px;align-items:center;padding:25px 0;cursor:pointer;list-style:none}.toc-chapter>summary::-webkit-details-marker{display:none}.toc-no{color:#7b898e;font:italic 16px Georgia,serif}.toc-title{font:30px/1.1 Georgia,serif}.toc-group{border-top:1px solid var(--line);margin-left:64px}.toc-group>summary{display:flex;justify-content:space-between;gap:18px;align-items:center;padding:17px 0;cursor:pointer;list-style:none;font-weight:700}.toc-group>summary::-webkit-details-marker{display:none}.toc-group-body{border-left:1px solid var(--line);padding:2px 0 14px 18px}.toc-leaf{display:block;padding:10px 0;color:#555d5f;text-decoration:none;line-height:1.45}.toc-leaf:hover{color:var(--ink)}.toc-open{display:inline-block;margin:0 0 25px 64px;font-size:12px;font-weight:700;text-decoration:none}
+  :root {
+    --ink: #15191d;
+    --muted: #667278;
+    --line: rgba(21,25,29,.14);
+    --navy: #152b34;
+    --cream: #f4f1ea;
+    --white: #ffffff;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+  }
+
+  .toc-page {
+    max-width: 1160px;
+    margin: auto;
+    padding: 70px 28px 120px;
+  }
+
+  .toc-page h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(52px, 8vw, 100px);
+    font-weight: 400;
+    line-height: .95;
+    margin: 12px 0 22px;
+    color: var(--ink) !important;
+  }
+
+  .toc-intro {
+    max-width: 700px;
+    font: 22px/1.5 Georgia, serif;
+    color: #3e4344 !important;
+    margin: 0 0 28px;
+  }
+
+  /* Evidence button */
+
+  .evidence-entry {
+    margin: 0 0 70px;
+  }
+
+  .evidence-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    min-height: 48px;
+    padding: 0 20px;
+    border: 1px solid #8a969b;
+    background: transparent;
+    color: var(--ink) !important;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    transition:
+      background .2s ease,
+      color .2s ease,
+      border-color .2s ease;
+  }
+
+  .evidence-button:hover {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--white) !important;
+  }
+
+  .evidence-button span {
+    font-size: 15px;
+    line-height: 1;
+  }
+
+  /* Parts */
+
+  .toc-part {
+    border-top: 1px solid var(--line);
+    margin-top: 18px;
+  }
+
+  .toc-part > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 30px 0;
+    cursor: pointer;
+    list-style: none;
+    color: var(--ink) !important;
+  }
+
+  .toc-part > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .toc-part-title {
+    font: 32px/1.1 Georgia, serif;
+    color: var(--ink) !important;
+  }
+
+  .toc-part-mark,
+  .toc-chapter-mark,
+  .toc-group-mark {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #68757a !important;
+    flex: none;
+    transition:
+      transform .2s ease,
+      background .2s ease,
+      color .2s ease;
+  }
+
+  .toc-part[open] > summary .toc-part-mark,
+  .toc-chapter[open] > summary .toc-chapter-mark,
+  .toc-group[open] > summary .toc-group-mark {
+    transform: rotate(45deg);
+    background: var(--navy);
+    color: var(--white) !important;
+  }
+
+  .toc-chapters {
+    padding-bottom: 20px;
+  }
+
+  /* Chapters */
+
+  .toc-chapter {
+    border-top: 1px solid var(--line);
+    padding-left: 18px;
+  }
+
+  .toc-chapter > summary {
+    display: grid;
+    grid-template-columns: 45px 1fr 30px;
+    gap: 18px;
+    align-items: center;
+    padding: 25px 0;
+    cursor: pointer;
+    list-style: none;
+    color: var(--ink) !important;
+  }
+
+  .toc-chapter > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .toc-no {
+    color: #7b898e !important;
+    font: italic 16px Georgia, serif;
+  }
+
+  .toc-title {
+    font: 30px/1.1 Georgia, serif;
+    color: var(--ink) !important;
+  }
+
+  /* Open chapter */
+
+  .toc-open {
+    display: inline-block;
+    margin: 0 0 25px 64px;
+    color: var(--ink) !important;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .toc-open:hover {
+    color: var(--navy) !important;
+  }
+
+  /* Groups */
+
+  .toc-group {
+    border-top: 1px solid var(--line);
+    margin-left: 64px;
+  }
+
+  .toc-group > summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    align-items: center;
+    padding: 17px 0;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 700;
+    color: var(--ink) !important;
+  }
+
+  .toc-group > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .toc-group > summary > span:first-child {
+    color: var(--ink) !important;
+  }
+
+  .toc-group-body {
+    border-left: 1px solid var(--line);
+    padding: 2px 0 14px 18px;
+  }
+
+  /* Nested groups */
+
+  .toc-group .toc-group {
+    margin-left: 0;
+  }
+
+  .toc-group .toc-group > summary {
+    padding: 15px 0;
+  }
+
+  /* Topics */
+
+  .toc-leaf {
+    display: block;
+    padding: 10px 0;
+    color: #555d5f !important;
+    text-decoration: none;
+    line-height: 1.45;
+  }
+
+  .toc-leaf:hover {
+    color: var(--ink) !important;
+  }
+
+  /* Prevent invisible dynamically-rendered content */
+
+  #toc,
+  #toc details,
+  #toc summary,
+  #toc span,
+  #toc a {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  @media (max-width: 700px) {
+
+    .toc-page {
+      padding: 50px 20px 90px;
+    }
+
+    .toc-page h1 {
+      font-size: clamp(48px, 15vw, 76px);
+    }
+
+    .toc-intro {
+      font-size: 19px;
+    }
+
+    .toc-chapter {
+      padding-left: 8px;
+    }
+
+    .toc-chapter > summary {
+      grid-template-columns: 35px 1fr 30px;
+      gap: 10px;
+    }
+
+    .toc-title {
+      font-size: 25px;
+    }
+
+    .toc-group {
+      margin-left: 35px;
+    }
+
+    .toc-open {
+      margin-left: 35px;
+    }
+
+    .evidence-button {
+      width: 100%;
+      max-width: 360px;
+      justify-content: center;
+    }
+  }
 </style>
 </head>
+
 <body>
-<header class="site-header"><a class="brand" href="https://propropro25.github.io/book/">A Theory of Integration</a><nav class="top-nav"><a href="https://propropro25.github.io/intro/">Author</a><a href="https://propropro25.github.io/TOC/">Contents</a></nav></header>
-<main class="toc-page"><div class="eyebrow">Contents</div><h1>The book, in layers.</h1><p class="toc-intro">Open a part, then a chapter, then a subject. The deeper levels stay hidden until you choose to explore them.</p><div id="toc"></div></main>
+
+<header class="site-header">
+
+  <a
+    class="brand"
+    href="https://propropro25.github.io/book/"
+  >
+    A Theory of Integration
+  </a>
+
+  <nav class="top-nav">
+    <a href="https://propropro25.github.io/intro/">Author</a>
+    <a href="https://propropro25.github.io/TOC/">Contents</a>
+  </nav>
+
+</header>
+
+
+<main class="toc-page">
+
+  <div class="eyebrow">Contents</div>
+
+  <h1>The book, in layers.</h1>
+
+  <p class="toc-intro">
+    Open a part, then a chapter, then a subject. The deeper levels stay hidden until you choose to explore them.
+  </p>
+
+  <div class="evidence-entry">
+    <a
+      class="evidence-button"
+      href="https://propropro25.github.io/homebase/"
+    >
+      Get straight to the evidence
+      <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+
+  <div id="toc"></div>
+
+</main>
+
+
 <script>
-const chapters=[{"repo":"chapter1","number":"01","part":"Part I — The Human","title":"Our Significance","groups":[{"title":"The question of human significance","children":["Would you trade your existence for anything in the universe? (what in the known universe is more capable than you?)","What if we are significant?"]},{"title":"Perception, agency & dimensionality","children":["Free will and perception","Dimensionality"]},{"title":"What makes the human different?","children":["Why humans are not animals; personality, predictability, power","Evolution towards survival doesn't explain how we went from monkey to Mozart"]}]},{"repo":"chapter2","number":"02","part":"Part I — The Human","title":"Statistics","groups":[{"title":"The individual becomes a number","children":["The population vs the individual: What disappears when a person becomes a number?","Russian roulette: Statistical significance and personal significance","The experience becoming dimensionless data (a look at some Reddit posts)"]},{"title":"From experience to conclusion","children":["First-person experience → notes → tags → averages → conclusion","The reduction of a person: dismissing lived experience as “Anecdotal”"]},{"title":"What statistics erase","children":["What averages erase","The evolving definitions and terms used to describe the numbers"]}]},{"repo":"chapter3","number":"03","part":"Part II — The Systems","title":"Science","groups":[{"title":"Questioning science","children":["What happens when science cannot be questioned?","Applied versus natural science","What can be measured (and what can't)"]},{"title":"Complexity, usefulness & the citizen","children":["Ever-expanding complexity isn't a great sign","What science has done for the citizen"]},{"title":"Authority, transparency & expertise","children":["Data transparency should be priority if the data is obvious, right?","The monopoly of experts: Who is allowed to question?","Anti-science and misinformation claims are red herrings","Science as a religion: When science can’t be questioned","The language of the experts and fostering dependency"]}]},{"repo":"chapter4","number":"04","part":"Part II — The Systems","title":"Medicine","groups":[{"title":"What medicine has accomplished","children":["What has medicine accomplished (what do we know?)","Decades of promises and a review of the progress","Medical error and deaths","The health and state of medicine in America","The goal of medicine: POSIWID","The difference between illness and disease, healing vs management"]},{"title":"Vaccination","children":["What's being assumed?","What is a virus anyway? Are ANY viruses living? What viruses have been created?","How it began: Lady Montague and Inoculation","Jenner and cowpox and the origins of zoonosis and herpes","Vaccine mandates without any studies","Timeline of epidemic illness outbreaks in highly vaccinated cities","The promises of “Safety” and “Immunity” through the centuries","Antibodies and their evolution in scientific literature from harm to security","Adverse events of injections can effect any and every system in the body","Russian roulette with your newborn: how many adverse events are possible?","What can be established?: Benefits can’t be proven, just as autism can’t be proven, “by design”"]},{"title":"Medical procedures","children":[{"title":"So many Medical procedures are not supported by statistics:","children":[{"title":"Epidural Blood Patch (EBP)"},{"title":"Ventriculoperitoneal (VP) shunts"},{"title":"Intracortical microelectrode arrays (BCIs)"},{"title":"Deep brain stimulation (DBS)"},{"title":"Peripheral nerve grafting"},{"title":"Stereotactic radiosurgery"},{"title":"Endovascular coiling"},{"title":"Electroconvulsive therapy (ECT)"},{"title":"Spinal cord stimulator (SCS) implantation"},{"title":"Spinal fusion"},{"title":"Sacral neuromodulation (SNM)"},{"title":"Ablation"},{"title":"Autogenous arteriovenous (AV) fistula creation"},{"title":"Meniscal allograft transplantation"},{"title":"Lumbar discectomy"}]},{"title":"For each procedure","children":[{"title":"What it does"},{"title":"What physical assumption it depends upon"},{"title":"What evidence supports it"},{"title":"What outcomes are measured"},{"title":"What is not measured"},{"title":"What can go wrong"},{"title":"Official studies and patient reddit posts"}]}]},{"title":"Medication","children":["What is the difference between healing and manipulating?","Petrochemicals and Rockefeller’s impact on American medicine","How much money does the pharmaceutical industry spend and make?","Chirality of chemicals and life"]}]},{"repo":"chapter5","number":"05","part":"Part III — The Living World","title":"Biology","groups":[{"title":"What is life?","children":["What is the difference between a cell and a substance?","What is alive?","How does a single cell organism show consciousness? What is consciousness?","What sustains life?"]},{"title":"Vitamins, Supplements & Nutrition","children":["Vitamins","Supplements","Nutrition"]},{"title":"Metabolism & DNA","children":["Metabolism","DNA: Nuclear versus mitochondrial","DNA as a Wi-Fi password to your cloud"]},{"title":"The living body","children":["100 trillion cells came from one","Living oscillations: The scale of cell types","A body of living participants: seeing cells like citizens","Blood cells to nerve cells","Heart and Brain: Sustainer and observer"]}]},{"repo":"chapter6","number":"06","part":"Part III — The Living World","title":"Energy","groups":[{"title":"Intelligent organization","children":["Where does intelligent organization come from - what's the difference between a snake egg and a bird egg?"]},{"title":"Forces, fields & inversion","children":["Energy, physical forces and electromagnetic fields","Scalar field","The power of inversion created friction: light, sound, heat, kinetic energy"]},{"title":"States of matter","children":["The fourth state of matter: plasma"]}]},{"repo":"chapter7","number":"07","part":"Part III — The Living World","title":"Consciousness","groups":[{"title":"Body, perception & self","children":["Does the body make it or receive it?","Perception and self"]},{"title":"Gravity, consciousness & ego","children":["Gravity, consciousness, ego"]},{"title":"Memory & will","children":["Memory, will, perception"]},{"title":"The individual & the collective","children":["The individual receiver and collective consciousness"]}]},{"repo":"chapter8","number":"08","part":"Part IV — The Narratives","title":"History","groups":[{"title":"Who shaped the story?","children":["Who shaped the story we inherited?","The scientists that shaped our story"]},{"title":"Industry, medicine & disease","children":["The Industrial Revolution and the Great Stink","Diagnoses discovered alongside mandated vaccination","Louis Pasteur and germ theory","The Rockefeller laboratory and the Spanish flu","HeLa Cells and immortal cell lines in the lab","Hilary Koprowski and AIDs"]},{"title":"War & social engineering","children":["WW2 and the attack on racial mixing"]},{"title":"US Government & secrecy","children":["US Government","What is the public allowed to know? When does a citizen become a national threat?","Now, about all those mutilated cows the FBI refused to acknowledge...","Celebrating 100 years of attempting to weaponize the weather","DARPA uses our tax dollars to build literal nightmares (but don't worry they're for our \"security\"!)","DARPA created the internet (with Spider Island, of course)","Satellites and GPS and NASA and pizza delivery","So, what’s DARPA up to these days anyway? (Digital clones, real clones, smart dust, etc)"]},{"title":"Experiments, ethics & transhumanism","children":["A history of the ethics of experiments in science and medicine","The worst of MKUltra (is still going on today)","The forgotten Frank Olsens of history (words and warnings from government employees who died strangely)","Transhumanism: the goal, and the problem with everything man made","Defining intelligence: how dimensionality and perception and emotion shape human intelligence ( or, the difference between a picture of a flower and feeling the thorns of a rose as you smell its sweet perfume)"]}]},{"repo":"chapter9","number":"09","part":"Part IV — The Narratives","title":"Religion","groups":[{"title":"Symbols & inheritance","children":["What can a symbol reveal across different scales?","Mitochondrial Eve (a different look at the first sin / the pain of birth)","Solomon’s ring, sigil magic and the DNA of ancient bacteria that we call mitochondrial"]},{"title":"DNA, ark & possibility","children":["Noah's ark of DNA - what if we contain the balance of all potentials of life?"]},{"title":"Source, soul & Christ","children":["Source and soul - what is our purpose on earth?","Jesus Christ as superconductor","The first seed of the source"]},{"title":"A letter","children":["A letter to my Jewish friends"]}]},{"repo":"chapter10","number":"10","part":"Part V — Positive Possibilities","title":"Hypotheses","groups":[{"title":"What follows if these ideas are true?","children":["What would follow if these ideas were true?"]},{"title":"Scalar healing & DNA","children":["Scalar healing","DNA and cosmology","Black holes, white holes and DNA"]},{"title":"Dimensionality & the cosmos","children":["Dimensionality is unique to life","The significance of stars and silver chords","The significance of dreams"]}]}];
-const toc=document.getElementById('toc');
-const esc=s=>{const d=document.createElement('div');d.textContent=s;return d.innerHTML};
-const slug=s=>s.toLowerCase().replace(/[’']/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-function leaves(items,arr=[]){items.forEach(x=>x.children?leaves(x.children,arr):arr.push(x.title));return arr}
-function renderGroups(groups,repo,cls='toc-group'){
- const frag=document.createDocumentFragment();
- groups.forEach(g=>{
-  const d=document.createElement('details');d.className=cls;
-  const s=document.createElement('summary');s.innerHTML='<span>'+esc(g.title)+'</span><span class="toc-group-mark">+</span>';d.appendChild(s);
-  const body=document.createElement('div');body.className='toc-group-body';
-  g.children.forEach(x=>{
-   if(x.children){
-    const sub=document.createElement('details');sub.className='toc-group';
-    const ss=document.createElement('summary');ss.innerHTML='<span>'+esc(x.title)+'</span><span class="toc-group-mark">+</span>';sub.appendChild(ss);
-    const sb=document.createElement('div');sb.className='toc-group-body';
-    x.children.forEach(y=>{const a=document.createElement('a');a.className='toc-leaf';a.href='https://propropro25.github.io/'+repo+'/#'+slug(y.title);a.textContent=y.title;sb.appendChild(a)});
-    sub.appendChild(sb);body.appendChild(sub);
-   }else{
-    const a=document.createElement('a');a.className='toc-leaf';a.href='https://propropro25.github.io/'+repo+'/#'+slug(x.title);a.textContent=x.title;body.appendChild(a);
-   }
-  });
-  d.appendChild(body);frag.appendChild(d);
- });
- return frag;
+
+/* =========================================================
+   BOOK STRUCTURE
+   ========================================================= */
+
+const chapters = [
+
+  /* =========================
+     PART I — THE HUMAN
+     ========================= */
+
+  {
+    repo: "chapter1",
+    number: "01",
+    part: "Part I — The Human",
+    title: "Our Significance",
+
+    groups: [
+
+      {
+        title: "The question of human significance",
+        children: [
+          "Would you trade your existence for anything in the universe? (what in the known universe is more capable than you?)",
+          "What if we are significant?"
+        ]
+      },
+
+      {
+        title: "Perception, agency & dimensionality",
+        children: [
+          "Free will and perception",
+          "Dimensionality"
+        ]
+      },
+
+      {
+        title: "What makes the human different?",
+        children: [
+          "Why humans are not animals; personality, predictability, power",
+          "Evolution towards survival doesn't explain how we went from monkey to Mozart"
+        ]
+      }
+
+    ]
+  },
+
+
+  {
+    repo: "chapter2",
+    number: "02",
+    part: "Part I — The Human",
+    title: "Statistics",
+
+    groups: [
+
+      {
+        title: "The individual becomes a number",
+        children: [
+          "The population vs the individual: What disappears when a person becomes a number?",
+          "Russian roulette: Statistical significance and personal significance",
+          "The experience becoming dimensionless data (a look at some Reddit posts)"
+        ]
+      },
+
+      {
+        title: "From experience to conclusion",
+        children: [
+          "First-person experience → notes → tags → averages → conclusion",
+          "The reduction of a person: dismissing lived experience as “Anecdotal”"
+        ]
+      },
+
+      {
+        title: "What statistics erase",
+        children: [
+          "What averages erase",
+          "The evolving definitions and terms used to describe the numbers"
+        ]
+      }
+
+    ]
+  },
+
+
+  /* =========================
+     PART II — THE SYSTEMS
+     ========================= */
+
+  {
+    repo: "chapter3",
+    number: "03",
+    part: "Part II — The Systems",
+    title: "Science",
+
+    groups: [
+
+      {
+        title: "Questioning science",
+        children: [
+          "What happens when science cannot be questioned?",
+          "Applied versus natural science",
+          "What can be measured (and what can't)"
+        ]
+      },
+
+      {
+        title: "Complexity, usefulness & the citizen",
+        children: [
+          "Ever-expanding complexity isn't a great sign",
+          "What science has done for the citizen"
+        ]
+      },
+
+      {
+        title: "Authority, transparency & expertise",
+        children: [
+          "Data transparency should be priority if the data is obvious, right?",
+          "The monopoly of experts: Who is allowed to question?",
+          "Anti-science and misinformation claims are red herrings",
+          "Science as a religion: When science can’t be questioned",
+          "The language of the experts and fostering dependency"
+        ]
+      }
+
+    ]
+  },
+
+
+  {
+    repo: "chapter4",
+    number: "04",
+    part: "Part II — The Systems",
+    title: "Medicine",
+
+    groups: [
+
+      {
+        title: "What medicine has accomplished",
+        children: [
+          "What has medicine accomplished (what do we know?)",
+          "Decades of promises and a review of the progress",
+          "Medical error and deaths",
+          "The health and state of medicine in America",
+          "The goal of medicine: POSIWID",
+          "The difference between illness and disease, healing vs management"
+        ]
+      },
+
+
+      {
+        title: "Vaccination",
+
+        children: [
+
+          "What's being assumed?",
+
+          "What is a virus anyway? Are ANY viruses living? What viruses have been created?",
+
+          {
+            title: "Origins",
+
+            children: [
+              "How it began: Lady Montague and Inoculation",
+              "Jenner and cowpox and the origins of zoonosis and herpes",
+              "Vaccine mandates without any studies",
+              "Timeline of epidemic illness outbreaks in highly vaccinated cities",
+              "The promises of “Safety” and “Immunity” through the centuries",
+              "Antibodies and their evolution in scientific literature from harm to security"
+            ]
+          },
+
+          "Adverse events of injections can effect any and every system in the body",
+
+          "Russian roulette with your newborn: how many adverse events are possible?",
+
+          "What can be established?: Benefits can’t be proven, just as autism can’t be proven, “by design”"
+
+        ]
+      },
+
+
+      {
+        title: "Medical procedures are not supported by statistics:",
+
+        children: [
+
+          "Epidural Blood Patch (EBP)",
+          "Ventriculoperitoneal (VP) shunts",
+          "Intracortical microelectrode arrays (BCIs)",
+          "Deep brain stimulation (DBS)",
+          "Peripheral nerve grafting",
+          "Stereotactic radiosurgery",
+          "Endovascular coiling",
+          "Electroconvulsive therapy (ECT)",
+          "Spinal cord stimulator (SCS) implantation",
+          "Spinal fusion",
+          "Sacral neuromodulation (SNM)",
+          "Ablation",
+          "Autogenous arteriovenous (AV) fistula creation",
+          "Meniscal allograft transplantation",
+          "Lumbar discectomy"
+
+        ]
+      },
+
+
+      {
+        title: "Medication",
+
+        children: [
+
+          "What is the difference between healing and manipulating?",
+
+          "Petrochemicals and Rockefeller’s impact on American medicine",
+
+          "How much money does the pharmaceutical industry spend and make?",
+
+          "Chirality of chemicals and life"
+
+        ]
+      }
+
+    ]
+  },
+
+
+  /* =========================
+     PART III — THE LIVING WORLD
+     ========================= */
+
+  {
+    repo: "chapter5",
+    number: "05",
+    part: "Part III — The Living World",
+    title: "Biology",
+
+    groups: [
+
+      {
+        title: "What is life?",
+        children: [
+          "What is the difference between a cell and a substance?",
+          "What is alive?",
+          "How does a single cell organism show consciousness? What is consciousness?",
+          "What sustains life?"
+        ]
+      },
+
+      {
+        title: "Vitamins, Supplements & Nutrition",
+        children: [
+          "Vitamins",
+          "Supplements",
+          "Nutrition"
+        ]
+      },
+
+      {
+        title: "Metabolism & DNA",
+        children: [
+          "Metabolism",
+          "DNA: Nuclear versus mitochondrial",
+          "DNA as a Wi-Fi password to your cloud"
+        ]
+      },
+
+      {
+        title: "The living body",
+        children: [
+          "100 trillion cells came from one",
+          "Living oscillations: The scale of cell types",
+          "A body of living participants: seeing cells like citizens",
+          "Blood cells to nerve cells",
+          "Heart and Brain: Sustainer and observer"
+        ]
+      }
+
+    ]
+  },
+
+
+  {
+    repo: "chapter6",
+    number: "06",
+    part: "Part III — The Living World",
+    title: "Energy",
+
+    groups: [
+
+      {
+        title: "Intelligent organization",
+        children: [
+          "Where does intelligent organization come from - what's the difference between a snake egg and a bird egg?"
+        ]
+      },
+
+      {
+        title: "Forces, fields & inversion",
+        children: [
+          "Energy, physical forces and electromagnetic fields",
+          "Scalar field",
+          "The power of inversion created friction: light, sound, heat, kinetic energy"
+        ]
+      },
+
+      {
+        title: "States of matter",
+        children: [
+          "The fourth state of matter: plasma"
+        ]
+      }
+
+    ]
+  },
+
+
+  {
+    repo: "chapter7",
+    number: "07",
+    part: "Part III — The Living World",
+    title: "Consciousness",
+
+    groups: [
+
+      {
+        title: "Body, perception & self",
+        children: [
+          "Does the body make it or receive it?",
+          "Perception and self"
+        ]
+      },
+
+      {
+        title: "Gravity, consciousness & ego",
+        children: [
+          "Gravity, consciousness, ego"
+        ]
+      },
+
+      {
+        title: "Memory & will",
+        children: [
+          "Memory, will, perception"
+        ]
+      },
+
+      {
+        title: "The individual & the collective",
+        children: [
+          "The individual receiver and collective consciousness"
+        ]
+      }
+
+    ]
+  },
+
+
+  /* =========================
+     PART IV — THE NARRATIVES
+     ========================= */
+
+  {
+    repo: "chapter8",
+    number: "08",
+    part: "Part IV — The Narratives",
+    title: "History",
+
+    groups: [
+
+      {
+        title: "Who shaped the story?",
+        children: [
+          "Who shaped the story we inherited?",
+          "The scientists that shaped our story"
+        ]
+      },
+
+      {
+        title: "Industry, medicine & disease",
+        children: [
+          "The Industrial Revolution and the Great Stink",
+          "Diagnoses discovered alongside mandated vaccination",
+          "Louis Pasteur and germ theory",
+          "The Rockefeller laboratory and the Spanish flu",
+          "HeLa Cells and immortal cell lines in the lab",
+          "Hilary Koprowski and AIDs"
+        ]
+      },
+
+      {
+        title: "War & social engineering",
+        children: [
+          "WW2 and the attack on racial mixing"
+        ]
+      },
+
+      {
+        title: "US Government & secrecy",
+        children: [
+          "US Government",
+          "What is the public allowed to know? When does a citizen become a national threat?",
+          "Now, about all those mutilated cows the FBI refused to acknowledge...",
+          "Celebrating 100 years of attempting to weaponize the weather",
+          "DARPA uses our tax dollars to build literal nightmares (but don't worry they're for our \"security\"!)",
+          "DARPA created the internet (with Spider Island, of course)",
+          "Satellites and GPS and NASA and pizza delivery",
+          "So, what’s DARPA up to these days anyway? (Digital clones, real clones, smart dust, etc)"
+        ]
+      },
+
+      {
+        title: "Experiments, ethics & transhumanism",
+        children: [
+          "A history of the ethics of experiments in science and medicine",
+          "The worst of MKUltra (is still going on today)",
+          "The forgotten Frank Olsens of history (words and warnings from government employees who died strangely)",
+          "Transhumanism: the goal, and the problem with everything man made",
+          "Defining intelligence: how dimensionality and perception and emotion shape human intelligence ( or, the difference between a picture of a flower and feeling the thorns of a rose as you smell its sweet perfume)"
+        ]
+      }
+
+    ]
+  },
+
+
+  {
+    repo: "chapter9",
+    number: "09",
+    part: "Part IV — The Narratives",
+    title: "Religion",
+
+    groups: [
+
+      {
+        title: "Symbols & inheritance",
+        children: [
+          "What can a symbol reveal across different scales?",
+          "Mitochondrial Eve (a different look at the first sin / the pain of birth)",
+          "Solomon’s ring, sigil magic and the DNA of ancient bacteria that we call mitochondrial"
+        ]
+      },
+
+      {
+        title: "DNA, ark & possibility",
+        children: [
+          "Noah's ark of DNA - what if we contain the balance of all potentials of life?"
+        ]
+      },
+
+      {
+        title: "Source, soul & Christ",
+        children: [
+          "Source and soul - what is our purpose on earth?",
+          "Jesus Christ as superconductor",
+          "The first seed of the source"
+        ]
+      },
+
+      {
+        title: "A letter",
+        children: [
+          "A letter to my Jewish friends"
+        ]
+      }
+
+    ]
+  },
+
+
+  /* =========================
+     PART V — POSITIVE POSSIBILITIES
+     ========================= */
+
+  {
+    repo: "chapter10",
+    number: "10",
+    part: "Part V — Positive Possibilities",
+    title: "Hypotheses",
+
+    groups: [
+
+      {
+        title: "What would follow if these ideas were true?",
+        children: [
+          "What would follow if these ideas were true?"
+        ]
+      },
+
+      {
+        title: "Scalar healing & DNA",
+        children: [
+          "Scalar healing",
+          "DNA and cosmology",
+          "Black holes, white holes and DNA"
+        ]
+      },
+
+      {
+        title: "Dimensionality & the cosmos",
+        children: [
+          "Dimensionality is unique to life",
+          "The significance of stars and silver chords",
+          "The significance of dreams"
+        ]
+      }
+
+    ]
+  }
+
+];
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+const toc = document.getElementById("toc");
+
+function escapeHTML(value) {
+  const div = document.createElement("div");
+  div.textContent = value;
+  return div.innerHTML;
 }
-const partNames=[...new Set(chapters.map(c=>c.part))];
-partNames.forEach(partName=>{
- const pd=document.createElement('details');pd.className='toc-part';
- const ps=document.createElement('summary');ps.innerHTML='<span class="toc-part-title">'+esc(partName.split(' — ')[1])+'</span><span class="toc-part-mark">+</span>';pd.appendChild(ps);
- const cb=document.createElement('div');cb.className='toc-chapters';
- chapters.filter(c=>c.part===partName).forEach(c=>{
-  const cd=document.createElement('details');cd.className='toc-chapter';
-  const cs=document.createElement('summary');cs.innerHTML='<span class="toc-no">'+esc(c.number)+'</span><span class="toc-title">'+esc(c.title)+'</span><span class="toc-chapter-mark">+</span>';cd.appendChild(cs);
-  const a=document.createElement('a');a.className='toc-open';a.href='https://propropro25.github.io/'+c.repo+'/';a.textContent='Open chapter →';cd.appendChild(a);
-  cd.appendChild(renderGroups(c.groups,c.repo));
-  cb.appendChild(cd);
- });
- pd.appendChild(cb);toc.appendChild(pd);
+
+function slug(value) {
+  return value
+    .toLowerCase()
+    .replace(/[’']/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+
+/* =========================================================
+   RENDER A GROUP AT ANY DEPTH
+   ========================================================= */
+
+function renderGroup(group, repo) {
+
+  const details = document.createElement("details");
+  details.className = "toc-group";
+
+  const summary = document.createElement("summary");
+
+  summary.innerHTML =
+    "<span>" +
+    escapeHTML(group.title) +
+    "</span>" +
+    '<span class="toc-group-mark">+</span>';
+
+  details.appendChild(summary);
+
+  const body = document.createElement("div");
+  body.className = "toc-group-body";
+
+  group.children.forEach(item => {
+
+    /* Nested group */
+
+    if (
+      typeof item === "object" &&
+      item !== null &&
+      Array.isArray(item.children)
+    ) {
+
+      body.appendChild(
+        renderGroup(item, repo)
+      );
+
+    }
+
+    /* Leaf topic */
+
+    else {
+
+      const link = document.createElement("a");
+
+      link.className = "toc-leaf";
+
+      link.href =
+        "https://propropro25.github.io/" +
+        repo +
+        "/#" +
+        slug(item);
+
+      link.textContent = item;
+
+      body.appendChild(link);
+    }
+
+  });
+
+  details.appendChild(body);
+
+  return details;
+}
+
+
+/* =========================================================
+   RENDER CHAPTER
+   ========================================================= */
+
+function renderChapter(chapter) {
+
+  const details = document.createElement("details");
+
+  details.className = "toc-chapter";
+
+  const summary = document.createElement("summary");
+
+  summary.innerHTML =
+    '<span class="toc-no">' +
+    escapeHTML(chapter.number) +
+    "</span>" +
+
+    '<span class="toc-title">' +
+    escapeHTML(chapter.title) +
+    "</span>" +
+
+    '<span class="toc-chapter-mark">+</span>';
+
+  details.appendChild(summary);
+
+
+  const openLink = document.createElement("a");
+
+  openLink.className = "toc-open";
+
+  openLink.href =
+    "https://propropro25.github.io/" +
+    chapter.repo +
+    "/";
+
+  openLink.textContent = "Open chapter →";
+
+  details.appendChild(openLink);
+
+
+  const groups = document.createDocumentFragment();
+
+  chapter.groups.forEach(group => {
+
+    groups.appendChild(
+      renderGroup(group, chapter.repo)
+    );
+
+  });
+
+  details.appendChild(groups);
+
+  return details;
+}
+
+
+/* =========================================================
+   RENDER PARTS
+   ========================================================= */
+
+const partNames = [
+  ...new Set(
+    chapters.map(chapter => chapter.part)
+  )
+];
+
+partNames.forEach(partName => {
+
+  const part = document.createElement("details");
+
+  part.className = "toc-part";
+
+
+  const summary = document.createElement("summary");
+
+  const displayName =
+    partName.includes(" — ")
+      ? partName.split(" — ")[1]
+      : partName;
+
+  summary.innerHTML =
+    '<span class="toc-part-title">' +
+    escapeHTML(displayName) +
+    "</span>" +
+
+    '<span class="toc-part-mark">+</span>';
+
+  part.appendChild(summary);
+
+
+  const chapterContainer =
+    document.createElement("div");
+
+  chapterContainer.className =
+    "toc-chapters";
+
+
+  chapters
+    .filter(chapter => chapter.part === partName)
+    .forEach(chapter => {
+
+      chapterContainer.appendChild(
+        renderChapter(chapter)
+      );
+
+    });
+
+
+  part.appendChild(chapterContainer);
+
+  toc.appendChild(part);
+
 });
+
 </script>
+
 </body>
 </html>
